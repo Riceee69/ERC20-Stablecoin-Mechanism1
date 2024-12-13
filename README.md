@@ -1,4 +1,4 @@
-Artihmetic, Exogenous stablecoin pegged to the value of US Dollar.
+Algorithmic, Exogenous stablecoin pegged to the value of US Dollar.
 
 How it works:
 
