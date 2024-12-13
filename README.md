@@ -1,57 +1,71 @@
-Algorithmic, Exogenous stablecoin pegged to the value of US Dollar.
+# Algorithmic, Exogenous Stablecoin
 
-How it works:
+An algorithmic stablecoin pegged to the value of the US Dollar.
 
-- There are two contracts StableCoin and DepositorCoin.
+---
 
-- The StableCoin(STC) minters pay only the amount of StableCoin they mint.
+## Overview
 
-- The Over Collaterlization is maintained by people who choose to provide liquidity to the pool with no intention of minting the StableCoin.
+This system comprises two contracts:
 
-- Incentives for the liquidty providers:
-````
-a. They get a token 'DepositorCoin'(DPC) in exchange of the amount they provide. Initially amount DepositorCoin = Usd Value of the Liquidity Provided.
+1. **StableCoin (STC)**
+2. **DepositorCoin (DPC)**
 
-b. Benefits: this coin acts as a leverage trading system.
+The StableCoin minters pay only the amount of STC they mint. Over-collateralization is maintained by liquidity providers who deposit without intending to mint StableCoin.
 
-eg: if 1 ETH = 1000$
+---
 
-let's say Person A Minted 500 STC depositing $500 in ETH (0.5 ETH)
+## How It Works
 
-Person B provides liquidty to the StableCoin contract depositing $1000 in ETH (1 ETH) and getting 1000 DPC.
+### **Incentives for Liquidity Providers**
 
-Total ETH in pool = 1.5 = $1500
-````
+1. **DepositorCoin (DPC)**: Liquidity providers receive DPC tokens equivalent to the USD value of their provided liquidity.
+2. **Leverage Trading Mechanism**: 
+   - Example:
+     - **ETH Price:** $1,000/ETH
+     - **Minting Scenario:**
+       - Person A mints 500 STC by depositing $500 worth of ETH (0.5 ETH).
+       - Person B provides liquidity by depositing $1,000 worth of ETH (1 ETH) and receives 1,000 DPC.
+       - **Total ETH in Pool:** 1.5 ETH ($1,500).
 
-- Scenarios:
-````
-A: ETH price goes down (1 ETH = 500$)
+#### **Scenarios**
 
-total ETH in pool = 1.5 = $750
+- **Scenario A:** ETH Price Decreases ($500/ETH)
+  - Total ETH in Pool = 1.5 ETH = $750
+  - Total DPC Supply = 1,000 DPC
+  - Total DPC Value = $750 - $500 (STC liabilities) = $250
+  - **DPC Price:** $0.25/DPC
 
-500 is the total DPC supply Hence total DPC value = 750 - 500 = $250
+- **Scenario B:** ETH Price Increases ($1,500/ETH)
+  - Total ETH in Pool = 1.5 ETH = $2,250
+  - Total DPC Supply = 1,000 DPC
+  - Total DPC Value = $2,250 - $500 (STC liabilities) = $1,750
+  - **DPC Price:** $1.75/DPC
 
-Now, 1000 DPC = $250 (1 DPC = $0.25)
+---
 
-B: ETH price goes up (1 ETH = 1500$)
+### **Underwater Contract**
 
-total ETH in pool = 1.5 = $2250
+If the collateral falls below the value of minted StableCoins:
 
-500 is the total DPC supply Hence total DPC value = 2250 - 500 = $1750
+1. **Contract Freeze**: The StableCoin contract is frozen.
+2. **DPC Devaluation**: DepositorCoins are deemed worthless.
+3. **Re-Collateralization**: 
+   - New liquidity providers must deposit a sufficient amount to over-collateralize and restore the pool's health.
+   - **Incentives**: Exclusive liquidity provision rights for a specified duration.
 
-Now, 1000 DPC = $1750 (1 DPC = $1.75)
-````
+---
 
-\- If the contract goes underwater, then
-````
-a. The StableCoin contract is freezed
+## Key Benefits
 
-b. The DepositorCoins are deemed worthless
+- Algorithmic control ensures a stable peg to the US Dollar.
+- DepositorCoin holders benefit from a leverage-based profit mechanism.
+- Strong incentives for re-collateralization to maintain system stability.
 
-c. The only way to over collateralize again is someone providing liquidity above a certain amount to prevent immediate under collaterlization if people start withdrawing their STC.
+---
 
-Incentives for the provider:
+## Disclaimer
 
-They can be the sole liquidty provider for a certain period of time.
-````
+This system is experimental and carries risks, especially during periods of high volatility. Please exercise caution and conduct thorough research before participating.
 
+---
